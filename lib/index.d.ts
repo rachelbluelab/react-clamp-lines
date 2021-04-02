@@ -12,6 +12,7 @@ export interface ClampLinesProps {
   delay?: number
   stopPropagation?: boolean
   innerElement?: string
+  watchIsClampLine?: (isClampLine: boolean) => void
 }
 
 declare class ClampLines extends React.Component<ClampLinesProps> {}

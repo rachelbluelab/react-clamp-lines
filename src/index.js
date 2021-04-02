@@ -104,6 +104,11 @@ export default class ClampLines extends PureComponent {
           text: this.original,
           noClamp: true,
         });
+
+        if (this.props.watchIsClampLine) {
+          this.props.watchIsClampLine(false);
+        }
+
         return;
       }
 
@@ -115,6 +120,10 @@ export default class ClampLines extends PureComponent {
     this.setState({
       text: this.original.slice(0, this.middle - 5) + this.getEllipsis(),
     });
+
+    if (this.props.watchIsClampLine) {
+      this.props.watchIsClampLine(true);
+    }
   }
 
   moveMarkers(maxHeight) {
@@ -173,7 +182,7 @@ export default class ClampLines extends PureComponent {
       return null;
     }
 
-    const innerClampElement = React.createElement(this.props.innerElement, { 
+    const innerClampElement = React.createElement(this.props.innerElement, {
       ref: e => {
         this.element = e;
       },
@@ -202,6 +211,7 @@ ClampLines.propTypes = {
   delay: PropTypes.number,
   stopPropagation: PropTypes.bool,
   innerElement: PropTypes.string,
+  watchIsClampLine: PropTypes.func,
 };
 
 ClampLines.defaultProps = {
